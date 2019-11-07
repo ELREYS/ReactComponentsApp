@@ -5,6 +5,47 @@ import { FlatList } from "react-native-gesture-handler";
 
 const SquareScreen = () => {
   //Function
+  const changeColorInc = color => {
+    switch (color) {
+      case "Red":
+        setRed(red + 1);
+        console.log(red);
+        break;
+      case "Green":
+        // code block
+        setGreen(green + 1);
+        console.log(green);
+        break;
+      case "Blue":
+        // code block
+        setBlue(blue + 1);
+        console.log(blue);
+        break;
+      default:
+      // code block
+    }
+  };
+
+  const changeColorDec = color => {
+    switch (color) {
+      case "Red":
+        setRed(red - 1);
+        console.log(red);
+        break;
+      case "Green":
+        // code block
+        setGreen(green - 1);
+        console.log(green);
+        break;
+      case "Blue":
+        // code block
+        setBlue(blue - 1);
+        console.log(blue);
+        break;
+      default:
+      // code block
+    }
+  };
 
   const [red, setRed] = useState(Math.floor(Math.random() * 256));
   const [green, setGreen] = useState(Math.floor(Math.random() * 256));
@@ -12,10 +53,9 @@ const SquareScreen = () => {
 
   //console.log(red + green + blue);
 
-  const currentColor = [red,green,blue];
+  const currentColor = [red, green, blue];
 
   //console.log(currentColor);
-  
 
   const colorObject = [
     {
@@ -51,45 +91,10 @@ const SquareScreen = () => {
               buttonTitleM={item.buttonM}
               buttonTitleL={item.buttonL}
               buttonFunctionInc={() => {
-                  
-                switch(item.color) {
-                    case "Red":
-                      setRed(red + 1);
-                      console.log(red);
-                      ;
-                      break;
-                    case "Green":
-                      // code block
-                      setGreen(green + 1);
-                      console.log(green);
-                    case "Blue":
-                      // code block
-                      setBlue(blue + 1);
-                      console.log(blue);
-                    default:
-                      // code block
-                  }
-
+                changeColorInc(item.color);
               }}
-              buttonFunctionDec={(rgb) => {
-
-                switch(item.color) {
-                    case "Red":
-                      setRed(red - 1);
-                      console.log(red);
-                      ;
-                      break;
-                    case "Green":
-                      // code block
-                      setGreen(green - 1);
-                      console.log(green);
-                    case "Blue":
-                      // code block
-                      setBlue(blue - 1);
-                      console.log(blue);
-                    default:
-                      // code block
-                  }
+              buttonFunctionDec={() => {
+                changeColorDec(item.color);
               }}
             ></SquareDetails>
           );
@@ -97,10 +102,10 @@ const SquareScreen = () => {
       />
       <View
         style={{
-        alignSelf:'center',
+          alignSelf: "center",
           height: 100,
           width: 100,
-          margin:40,
+          margin: 40,
           backgroundColor: `rgb(${red},${green},${blue})`
         }}
       />
