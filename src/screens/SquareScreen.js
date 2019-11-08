@@ -11,29 +11,26 @@ const reducer = (state, action) => {
 
   switch (action.colorToChange) {
     case "Red":
-        return state.red + action.amount > 255 || state.red + action.amount < 0 
+      return state.red + action.amount > 255 || state.red + action.amount < 0
         ? state
-        : {...state, red: state.red + action.amount};  
+        : { ...state, red: state.red + action.amount };
     case "Green":
-            return state.green + action.amount > 255 || state.green + action.amount < 0 
-            ? state
-            : {...state, green: state.green + action.amount};
+      return state.green + action.amount > 255 ||
+        state.green + action.amount < 0
+        ? state
+        : { ...state, green: state.green + action.amount };
     case "Blue":
-            return state.blue + action.amount > 255 || state.blue + action.amount < 0 
-            ? state
-            : {...state, blue: state.blue + action.amount};
+      return state.blue + action.amount > 255 || state.blue + action.amount < 0
+        ? state
+        : { ...state, blue: state.blue + action.amount };
     default:
       break;
   }
 };
 
 const SquareScreen = () => {
-
-
-    
-
   const [state, dispatch] = useReducer(reducer, { red: 0, green: 0, blue: 0 });
-  const {red,green,blue} = state;
+  const { red, green, blue } = state;
   //Function
 
   //console.log(red + green + blue);
@@ -62,7 +59,6 @@ const SquareScreen = () => {
       index: "B"
     }
   ];
-  
 
   return (
     <View>
@@ -76,10 +72,16 @@ const SquareScreen = () => {
               buttonTitleM={item.buttonM}
               buttonTitleL={item.buttonL}
               buttonFunctionInc={() => {
-                dispatch({colorToChange:item.color,amount:COLOR_INCREMENT})
+                dispatch({
+                  colorToChange: item.color,
+                  amount: COLOR_INCREMENT
+                });
               }}
               buttonFunctionDec={() => {
-                dispatch({colorToChange:item.color,amount: -1 * -COLOR_INCREMENT})
+                dispatch({
+                  colorToChange: item.color,
+                  amount: -1 * -COLOR_INCREMENT
+                });
               }}
             ></SquareDetails>
           );
