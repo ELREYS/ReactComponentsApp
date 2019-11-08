@@ -48,13 +48,10 @@ const TextScreen = () => {
         style={styles.input}
         value={pwd}
         onChangeText={pwd => {
-          pwd.length < 8
-            ? setpwdPopUpWarning("Please add more characters")
-            : setpwdPopUpWarning("");
           setPwd(pwd);
         }}
       />
-      <Text>{pwdLengthPopUp}</Text>
+      {pwd.length < 4 ? <Text>Please add more characters</Text> : null}
     </View>
   );
 };
