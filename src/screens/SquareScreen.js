@@ -3,53 +3,34 @@ import { Text, StyleSheet, View, Button } from "react-native";
 import SquareDetails from "../components/SquareDetails";
 import { FlatList } from "react-native-gesture-handler";
 
+const COLOR_INCREMENT = 15;
+
 const SquareScreen = () => {
-  //Function
-  const changeColorInc = color => {
-    switch (color) {
-      case "Red":
-        setRed(red + 1);
-        console.log(red);
-        break;
-      case "Green":
-        // code block
-        setGreen(green + 1);
-        console.log(green);
-        break;
-      case "Blue":
-        // code block
-        setBlue(blue + 1);
-        console.log(blue);
-        break;
-      default:
-      // code block
-    }
-  };
-
-  const changeColorDec = color => {
-    switch (color) {
-      case "Red":
-        setRed(red - 1);
-        console.log(red);
-        break;
-      case "Green":
-        // code block
-        setGreen(green - 1);
-        console.log(green);
-        break;
-      case "Blue":
-        // code block
-        setBlue(blue - 1);
-        console.log(blue);
-        break;
-      default:
-      // code block
-    }
-  };
-
+  //Hooks
   const [red, setRed] = useState(Math.floor(Math.random() * 256));
   const [green, setGreen] = useState(Math.floor(Math.random() * 256));
   const [blue, setBlue] = useState(Math.floor(Math.random() * 256));
+
+  //Function
+
+  const setColor = (color, change) => {
+    switch (color) {
+      case "Red":
+        red + change > 255 || red + change < 0 ? null : setRed(red + change);
+        console.log(red);
+        return;
+      case "Green":
+        green + change > 255 || green + change < 0 ? null : setGreen(green + change);
+        console.log(green);
+        return;
+      case "Blue":
+        blue + change > 255 || blue + change < 0 ? null : setBlue(blue + change);
+        console.log(blue);
+        return;
+      default:
+      // code block
+    }
+  };
 
   //console.log(red + green + blue);
 
@@ -57,7 +38,7 @@ const SquareScreen = () => {
 
   //console.log(currentColor);
 
-  const colorObject = [
+  const colorArray = [
     {
       color: "Red",
       buttonM: "More Red",
@@ -77,12 +58,12 @@ const SquareScreen = () => {
       index: "B"
     }
   ];
-  const [color, setColor] = useState(colorObject);
+  const [colorObject, setColorObject] = useState(colorArray);
 
   return (
     <View>
       <FlatList
-        data={color}
+        data={colorObject}
         keyExtractor={item => item.index}
         renderItem={({ item }) => {
           return (
@@ -91,10 +72,10 @@ const SquareScreen = () => {
               buttonTitleM={item.buttonM}
               buttonTitleL={item.buttonL}
               buttonFunctionInc={() => {
-                changeColorInc(item.color);
+                setColor(item.color, COLOR_INCREMENT);
               }}
               buttonFunctionDec={() => {
-                changeColorDec(item.color);
+                setColor(item.color, -COLOR_INCREMENT);
               }}
             ></SquareDetails>
           );
